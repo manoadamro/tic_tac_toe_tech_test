@@ -10,6 +10,7 @@ class TurnManager
 
   def turn(x, y)
     next_turn if @board.place(x, y)
+    @current_turn
   end
 
   private

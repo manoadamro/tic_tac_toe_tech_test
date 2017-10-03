@@ -1,7 +1,6 @@
 require('./lib/turn_manager')
 
 describe 'Turn Manager' do
-
   let(:board) { double(:board) }
   let(:player1) { double(:player1) }
   let(:player2) { double(:player2) }
@@ -9,7 +8,6 @@ describe 'Turn Manager' do
   subject { TurnManager.new(players, board) }
 
   describe '#new' do
-
     it 'responds to new' do
       expect(TurnManager).to respond_to(:new).with(2).arguments
     end
@@ -37,11 +35,9 @@ describe 'Turn Manager' do
     it 'current_turn starts at 0' do
       expect(subject.current_turn).to eq(0)
     end
-
   end
 
   describe '#turn' do
-
     before do
       allow(player1).to receive(:plays).and_return(0)
       allow(player1).to receive(:plays=).and_return(0)
