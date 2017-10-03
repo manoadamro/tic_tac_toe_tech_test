@@ -26,18 +26,19 @@ describe 'Turn Manager' do
       expect(subject.board).to eq(board)
     end
 
-    it 'can reference player_index' do
-      expect(subject).to respond_to(:player_index)
+    it 'can reference turns' do
+      expect(subject).to respond_to(:turns)
     end
 
-    it 'player_index starts at 0' do
-      expect(subject.player_index).to eq(0)
+    it 'turns starts at 0' do
+      expect(subject.turns).to eq(0)
     end
   end
 
   describe '#turn' do
     before do
       allow(players).to receive(:'[]').and_return('!')
+      allow(board).to receive(:place).and_return(true)
     end
 
     it 'responds to turn' do
@@ -49,16 +50,21 @@ describe 'Turn Manager' do
       subject.turn(1, 1)
     end
 
-    it 'increments player_index on valid placement' do
-      allow(board).to receive(:place).and_return(true)
-      subject.turn(1, 2)
-      expect(subject.player_index).to eq(1)
+    it 'turn returns correct player index' do
+      allow(subject).to receive(:turns).and_return(156)
+      expect(subject.turn(1, 1)).to eq(1)
     end
 
-    it 'does not increment player_index on invalid placement' do
+    it 'increments turns on valid placement' do
+      allow(board).to receive(:place).and_return(true)
+      subject.turn(1, 2)
+      expect(subject.turns).to eq(1)
+    end
+
+    it 'does not increment turns on invalid placement' do
       allow(board).to receive(:place).and_return(false)
       subject.turn(1, 2)
-      expect(subject.player_index).to eq(0)
+      expect(subject.turns).to eq(0)
     end
   end
 end
