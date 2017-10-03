@@ -42,6 +42,10 @@ describe 'Board' do
   end
 
   describe '#place' do
+    it 'responds to place' do
+      expect(subject).to respond_to(:place).with(3).arguments
+    end
+
     it 'can place on empty tile' do
       expect(subject.place('X', 1, 1)).to eq(true)
     end
