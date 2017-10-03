@@ -1,11 +1,9 @@
-require_relative('./player.rb')
 require_relative('./turn_manager.rb')
 #
 class Game
   attr_reader :turn_manager
 
-  def initialize(player, board, turn_manager)
-    players = players(player)
+  def initialize(_player, board, turn_manager)
     @turn_manager = turn_manager.new(players, board.new)
   end
 
@@ -20,7 +18,7 @@ class Game
     puts "Player#{player + 1}s turn!"
   end
 
-  def players(player)
-    [player.new('X'), player.new('O')]
+  def players
+    %w[X O]
   end
 end

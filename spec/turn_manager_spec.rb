@@ -2,9 +2,7 @@ require('./lib/turn_manager')
 
 describe 'Turn Manager' do
   let(:board) { double(:board) }
-  let(:player1) { double(:player1) }
-  let(:player2) { double(:player2) }
-  let(:players) { [player1, player2] }
+  let(:players) { double(:players) }
   subject { TurnManager.new(players, board) }
 
   describe '#new' do
@@ -28,18 +26,18 @@ describe 'Turn Manager' do
       expect(subject.board).to eq(board)
     end
 
-    it 'can reference current_turn' do
-      expect(subject).to respond_to(:current_turn)
+    it 'can reference player_index' do
+      expect(subject).to respond_to(:player_index)
     end
 
-    it 'current_turn starts at 0' do
-      expect(subject.current_turn).to eq(0)
+    it 'player_index starts at 0' do
+      expect(subject.player_index).to eq(0)
     end
   end
 
   describe '#turn' do
     before do
-      allow(player1).to receive(:on_play)
+      allow(players).to receive(:'[]').and_return('!')
     end
 
     it 'responds to turn' do
@@ -51,28 +49,16 @@ describe 'Turn Manager' do
       subject.turn(1, 1)
     end
 
-    it 'increments current_turn on valid placement' do
+    it 'increments player_index on valid placement' do
       allow(board).to receive(:place).and_return(true)
       subject.turn(1, 2)
-      expect(subject.current_turn).to eq(1)
+      expect(subject.player_index).to eq(1)
     end
 
-    it 'does not increment current_turn on invalid placement' do
+    it 'does not increment player_index on invalid placement' do
       allow(board).to receive(:place).and_return(false)
       subject.turn(1, 2)
-      expect(subject.current_turn).to eq(0)
-    end
-
-    it 'increments player.plays on valid placement' do
-      allow(board).to receive(:place).and_return(true)
-      expect(player1).to receive(:on_play).exactly(1).times
-      subject.turn(1, 2)
-    end
-
-    it 'does not increment current_turn on invalid placement' do
-      allow(board).to receive(:place).and_return(false)
-      expect(player1).not_to receive(:on_play)
-      subject.turn(1, 2)
+      expect(subject.player_index).to eq(0)
     end
   end
 end

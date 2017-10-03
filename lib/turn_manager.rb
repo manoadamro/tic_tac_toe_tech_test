@@ -1,22 +1,25 @@
 #
 class TurnManager
-  attr_reader :current_turn, :board, :players
+  attr_reader :player_index, :board, :players
 
   def initialize(players, board)
     @players = players
     @board = board
-    @current_turn = 0
+    @player_index = 0
   end
 
   def turn(x, y)
-    next_turn if @board.place(x, y)
-    @current_turn
+    next_turn if @board.place(player_symbol, x, y)
+    @player_index
   end
 
   private
 
+  def player_symbol
+    @players[@player_index]
+  end
+
   def next_turn
-    @players[@current_turn].on_play
-    @current_turn = (@current_turn + 1) % 2
+    @player_index = (@player_index + 1) % 2
   end
 end
