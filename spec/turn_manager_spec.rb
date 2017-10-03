@@ -39,8 +39,7 @@ describe 'Turn Manager' do
 
   describe '#turn' do
     before do
-      allow(player1).to receive(:plays).and_return(0)
-      allow(player1).to receive(:plays=).and_return(0)
+      allow(player1).to receive(:on_play)
     end
 
     it 'responds to turn' do
@@ -66,13 +65,13 @@ describe 'Turn Manager' do
 
     it 'increments player.plays on valid placement' do
       allow(board).to receive(:place).and_return(true)
-      expect(player1).to receive(:plays).exactly(1).times
+      expect(player1).to receive(:on_play).exactly(1).times
       subject.turn(1, 2)
     end
 
     it 'does not increment current_turn on invalid placement' do
       allow(board).to receive(:place).and_return(false)
-      expect(player1).not_to receive(:plays)
+      expect(player1).not_to receive(:on_play)
       subject.turn(1, 2)
     end
   end

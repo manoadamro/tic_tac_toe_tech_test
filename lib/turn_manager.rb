@@ -16,7 +16,7 @@ class TurnManager
   private
 
   def next_turn
-    @players[@current_turn].plays += 1
+    @players[@current_turn].on_play
     @current_turn = (@current_turn + 1) % 2
   end
 end

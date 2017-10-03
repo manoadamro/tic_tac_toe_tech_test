@@ -30,7 +30,6 @@ describe 'Game' do
   end
 
   describe '#play' do
-
     before do
       allow(turn_manager).to receive(:turn).and_return(1)
     end
