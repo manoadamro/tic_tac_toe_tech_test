@@ -6,11 +6,12 @@ describe 'TileMatcher' do
   subject { TileMatcher.new(board, patterns) }
 
   before do
-    allow(board).to receive(:tile).and_return('')
-    allow(patterns).to receive(:column).and_return([[1, 1], [1, 1], [1, 1]])
-    allow(patterns).to receive(:row).and_return([[1, 1], [1, 1], [1, 1]])
-    allow(patterns).to receive(:diagonal).and_return([[1, 1], [1, 1], [1, 1]])
-    allow(patterns).to receive(:anti_diagonal).and_return([[1, 1], [1, 1], [1, 1]])
+    eg_array = [[1, 1], [1, 1], [1, 1]]
+    allow(board).to receive_message_chain(:tile, :[]).and_return('')
+    allow(patterns).to receive(:column).and_return(eg_array)
+    allow(patterns).to receive(:row).and_return(eg_array)
+    allow(patterns).to receive(:diagonal).and_return(eg_array)
+    allow(patterns).to receive(:anti_diagonal).and_return(eg_array)
   end
 
   describe '#new' do
@@ -34,9 +35,13 @@ describe 'TileMatcher' do
     end
 
     it 'calls patterns.row' do
-      allow(board).to receive(:tile).and_return('X')
       expect(patterns).to receive(:row)
       subject.row_or_column?(1)
+    end
+
+    it 'returns true if 3 in a column or row' do
+      allow(board).to receive_message_chain(:tile, :[]).and_return('X')
+      expect(subject.row_or_column?(1)).to eq(true)
     end
   end
 
@@ -47,9 +52,13 @@ describe 'TileMatcher' do
     end
 
     it 'calls patterns.anti_diagonal' do
-      allow(board).to receive(:tile).and_return('X')
       expect(patterns).to receive(:anti_diagonal)
       subject.diagonal?
+    end
+
+    it 'returns true if 3 in a diagonal or anti_diagonal' do
+      allow(board).to receive_message_chain(:tile, :[]).and_return('X')
+      expect(subject.diagonal?).to eq(true)
     end
   end
 end
