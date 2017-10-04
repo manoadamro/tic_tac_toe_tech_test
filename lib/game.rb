@@ -1,9 +1,11 @@
 require_relative('./turn_manager.rb')
+require_relative('./win_condition.rb')
+
 #
 class Game
   attr_reader :turn_manager, :win_condition
 
-  def initialize(_player, board,
+  def initialize(board,
                  turn_manager = TurnManager, win_condition = WinCondition)
     @turn_manager = turn_manager.new(players, board)
     @win_condition = win_condition.new(board, @turn_manager)

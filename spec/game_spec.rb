@@ -1,8 +1,6 @@
 require('./lib/game')
 
 describe 'Game' do
-  let(:player_klass) { double(:player_klass) }
-  let(:player) { double(:player) }
   let(:board_klass) { double(:board_klass) }
   let(:board) { double(:board) }
   let(:turn_manager_klass) { double(:turn_manager_klass) }
@@ -10,11 +8,10 @@ describe 'Game' do
   let(:win_condition_klass) { double(:win_condition_klass) }
   let(:win_condition) { double(:win_condition) }
   subject do
-    Game.new(player_klass, board_klass, turn_manager_klass, win_condition_klass)
+    Game.new(board_klass, turn_manager_klass, win_condition_klass)
   end
 
   before do
-    allow(player_klass).to receive(:new).and_return(player)
     allow(board_klass).to receive(:new).and_return(board)
     allow(turn_manager_klass).to receive(:new).and_return(turn_manager)
     allow(win_condition_klass).to receive(:new).and_return(win_condition)
