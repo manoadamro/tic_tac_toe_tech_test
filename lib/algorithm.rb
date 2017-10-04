@@ -1,6 +1,6 @@
 require('./lib/tile_matcher')
 
-#
+# Uses a tile matcher to determine if the game has finished or not
 class Algorithm
   def initialize(board, matcher = TileMatcher)
     @board = board

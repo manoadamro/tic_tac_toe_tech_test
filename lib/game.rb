@@ -1,7 +1,7 @@
 require_relative('./turn_manager.rb')
 require_relative('./win_condition.rb')
 
-#
+# The entry point for the program
 class Game
   attr_reader :turn_manager, :win_condition
 

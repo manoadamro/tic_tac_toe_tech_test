@@ -1,5 +1,5 @@
 
-#
+# Responsible for placing objects on tiles
 class Board
   attr_reader :size
 

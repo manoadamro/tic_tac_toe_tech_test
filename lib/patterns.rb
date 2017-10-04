@@ -1,4 +1,5 @@
-#
+
+# hold patterns relating to rows, columns and diagonals
 class Patterns
   def self.column(i)
     [[i, 0], [i, 1], [i, 2]]

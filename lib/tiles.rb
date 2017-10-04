@@ -1,4 +1,5 @@
-#
+
+# Hold an array of game tiles, can index and set specific tiles
 class Tiles
   def initialize(size, array_klass = Array)
     @size = size

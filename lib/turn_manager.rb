@@ -1,4 +1,5 @@
-#
+
+# keeps a log of who's turn it is
 class TurnManager
   attr_reader :board, :players, :turns
 
