@@ -28,13 +28,8 @@ describe 'Board' do
       Board.new(3, tiles_klass)
     end
 
-    it 'can reference sqr_size' do
-      expect(subject).to respond_to(:sqr_size)
-    end
-
-    it 'gets length from tiles' do
-      expect(tiles).to receive(:length)
-      subject.sqr_size
+    it 'can reference size' do
+      expect(subject).to respond_to(:size)
     end
   end
 
@@ -69,6 +64,17 @@ describe 'Board' do
     it 'gets tile from tiles' do
       expect(tiles).to receive(:[]).with(1, 1).exactly(1).times
       subject.tile(1, 1)
+    end
+  end
+
+  describe '#sqr_size' do
+    it 'can reference sqr_size' do
+      expect(subject).to respond_to(:sqr_size)
+    end
+
+    it 'gets length from tiles' do
+      expect(tiles).to receive(:length)
+      subject.sqr_size
     end
   end
 end

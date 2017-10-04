@@ -1,7 +1,10 @@
 
 #
 class Board
+  attr_reader :size
+
   def initialize(size = 3, tiles = Tiles)
+    @size = size
     @tiles = tiles.new(size)
   end
 

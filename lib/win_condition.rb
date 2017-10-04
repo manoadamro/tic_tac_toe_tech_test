@@ -8,8 +8,8 @@ class WinCondition
     @algorithm = algorithm.new(board)
   end
 
-  def check_for_win(coord_x, coord_y)
-    board_full || @algorithm.run_pass(coord_x, coord_y)
+  def check_for_win
+    board_full || @algorithm.run_pass
   end
 
   private
