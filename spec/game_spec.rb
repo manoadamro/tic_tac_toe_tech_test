@@ -7,12 +7,17 @@ describe 'Game' do
   let(:board) { double(:board) }
   let(:turn_manager_klass) { double(:turn_manager_klass) }
   let(:turn_manager) { double(:turn_manager) }
-  subject { Game.new(player_klass, board_klass, turn_manager_klass) }
+  let(:win_condition_klass) { double(:win_condition_klass) }
+  let(:win_condition) { double(:win_condition) }
+  subject do
+    Game.new(player_klass, board_klass, turn_manager_klass, win_condition_klass)
+  end
 
   before do
     allow(player_klass).to receive(:new).and_return(player)
     allow(board_klass).to receive(:new).and_return(board)
     allow(turn_manager_klass).to receive(:new).and_return(turn_manager)
+    allow(win_condition_klass).to receive(:new).and_return(win_condition)
   end
 
   describe '#new' do
@@ -27,11 +32,20 @@ describe 'Game' do
     it 'creates turn manager' do
       expect(subject.turn_manager).not_to eq(nil)
     end
+
+    it 'can reference win condition' do
+      expect(subject).to respond_to(:win_condition)
+    end
+
+    it 'creates win condition' do
+      expect(subject.win_condition).not_to eq(nil)
+    end
   end
 
   describe '#play' do
     before do
       allow(turn_manager).to receive(:turn).and_return(1)
+      allow(win_condition).to receive(:check_for_win).and_return(false)
     end
 
     it 'responds to play' do
@@ -43,8 +57,9 @@ describe 'Game' do
       subject.play(1, 1)
     end
 
-    it 'outputs turn info after turn is played' do
-      expect { subject.play(1, 1) }.to output("Player2s turn!\n").to_stdout
+    it 'calls win_condition.check_for_win' do
+      expect(win_condition).to receive(:check_for_win)
+      subject.play(1, 1)
     end
   end
 end

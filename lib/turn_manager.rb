@@ -10,14 +10,13 @@ class TurnManager
 
   def turn(x, y)
     next_turn if @board.place(player_symbol, x, y)
-    player_index
   end
-
-  private
 
   def player_index
     @turns % 2
   end
+
+  private
 
   def player_symbol
     @players[@player_index]

@@ -1,7 +1,14 @@
 require('./lib/board')
 
 describe 'Board' do
-  subject { Board.new(3) }
+  let(:tiles_klass) {double(:tiles_klass)}
+  let(:tiles) {double(:tiles)}
+  subject { Board.new(3, tiles_klass) }
+
+  before do
+    allow(tiles_klass).to receive(:new).and_return(tiles)
+    allow(tiles).to receive(:[])
+  end
 
   describe '#new' do
     it 'responds to new' do
@@ -12,32 +19,22 @@ describe 'Board' do
       expect(Board).to respond_to(:new).with(1).arguments
     end
 
-    it 'can reference size' do
-      expect(subject).to respond_to(:size)
+    it 'can pass optional tiles parameter' do
+      expect(Board).to respond_to(:new).with(2).arguments
     end
 
-    it 'sets default size' do
-      expect(subject).not_to eq(nil)
+    it 'creates an instance of tiles' do
+      expect(tiles_klass).to receive(:new)
+      Board.new(3, tiles_klass)
     end
 
-    it 'can override default board size' do
-      expect(Board.new(5).size).to eq(5)
+    it 'can reference sqr_size' do
+      expect(subject).to respond_to(:sqr_size)
     end
 
-    it 'can reference tiles' do
-      expect(subject).to respond_to(:tiles)
-    end
-
-    it 'creates a board array with correct number of tiles' do
-      expect(subject.tiles.length).to eq(9)
-    end
-
-    it 'inital values of board array are nil' do
-      ok = true
-      subject.tiles.each do |tile|
-        ok = false unless tile.nil?
-      end
-      expect(ok).to eq(true)
+    it 'gets length from tiles' do
+      expect(tiles).to receive(:length)
+      subject.sqr_size
     end
   end
 
@@ -46,18 +43,34 @@ describe 'Board' do
       expect(subject).to respond_to(:place).with(3).arguments
     end
 
-    it 'can place on empty tile' do
-      expect(subject.place('X', 1, 1)).to eq(true)
+    it 'checks that tile is available' do
+      expect(tiles).to receive(:[])
+      subject.place('X', 1, 1)
     end
 
-    it 'can not place on taken tile' do
+    it 'sets tile if available' do
+      allow(subject).to receive(:available?).and_return(true)
+      expect(tiles).to receive(:[]=).with(1, 1, 'X')
       subject.place('X', 1, 1)
-      expect(subject.place('X', 1, 1)).to eq(false)
     end
 
-    it 'places at correct index' do
+    it 'does not set tile if not available' do
+      allow(subject).to receive(:available?).and_return(false)
+      expect(tiles).not_to receive(:[]=)
       subject.place('X', 1, 1)
-      expect(subject.tiles[4]).to eq('X')
     end
+  end
+
+  describe '#tile' do
+
+    it 'responds to tile' do
+      expect(subject).to respond_to(:tile)
+    end
+
+    it 'gets tile from tiles' do
+      expect(tiles).to receive(:[]).with(1, 1).exactly(1).times
+      subject.tile(1, 1)
+    end
+
   end
 end

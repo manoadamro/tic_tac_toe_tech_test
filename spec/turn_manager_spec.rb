@@ -67,4 +67,21 @@ describe 'Turn Manager' do
       expect(subject.turns).to eq(0)
     end
   end
+
+  describe '#player_index' do
+    it 'responds to player_index' do
+      expect(subject).to respond_to(:player_index)
+    end
+
+    it 'returns 0 on even number of turns' do
+      expect(subject.player_index).to eq(0)
+    end
+
+    it 'returns 1 on odd number of turns' do
+      allow(board).to receive(:place).and_return(true)
+      allow(players).to receive(:'[]').and_return(true)
+      subject.turn(1, 1)
+      expect(subject.player_index).to eq(1)
+    end
+  end
 end

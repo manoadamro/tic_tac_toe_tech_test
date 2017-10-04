@@ -1,31 +1,28 @@
 
 #
 class Board
-  attr_reader :size, :tiles
 
-  def initialize(size = 3)
-    @size = size
-    @tiles = empty_board(size * size)
+  def initialize(size = 3, tiles = Tiles)
+    @tiles = tiles.new(size)
   end
 
   def place(value, x, y)
-    index = index_from_coord(x, y)
-    can_place = available?(index)
-    @tiles[index] = value if can_place
+    can_place = available?(x,y)
+    @tiles[x, y] = value if can_place
     can_place
+  end
+
+  def tile(x, y)
+    @tiles[x, y]
+  end
+
+  def sqr_size
+    @tiles.length
   end
 
   private
 
-  def index_from_coord(x, y)
-    (@size * y) + x
-  end
-
-  def available?(index)
-    @tiles[index].nil?
-  end
-
-  def empty_board(sqr_size)
-    Array.new(sqr_size) { nil }
+  def available?(x, y)
+    @tiles[x, y] == ''
   end
 end
