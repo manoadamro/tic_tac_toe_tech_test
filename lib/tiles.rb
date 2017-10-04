@@ -1,7 +1,6 @@
 #
 class Tiles
-
-  def initialize(size, array_klass=Array)
+  def initialize(size, array_klass = Array)
     @size = size
     @tiles = array_klass.new(size * size) { '' }
   end
@@ -12,7 +11,7 @@ class Tiles
     nil
   end
 
-  def []=(x,y, value)
+  def []=(x, y, value)
     index = index_from_coord(x, y)
     @tiles[index] = value
   end
@@ -26,5 +25,4 @@ class Tiles
   def index_from_coord(x, y)
     (@size * y) + x
   end
-
 end

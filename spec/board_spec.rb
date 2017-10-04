@@ -1,8 +1,8 @@
 require('./lib/board')
 
 describe 'Board' do
-  let(:tiles_klass) {double(:tiles_klass)}
-  let(:tiles) {double(:tiles)}
+  let(:tiles_klass) { double(:tiles_klass) }
+  let(:tiles) { double(:tiles) }
   subject { Board.new(3, tiles_klass) }
 
   before do
@@ -62,7 +62,6 @@ describe 'Board' do
   end
 
   describe '#tile' do
-
     it 'responds to tile' do
       expect(subject).to respond_to(:tile)
     end
@@ -71,6 +70,5 @@ describe 'Board' do
       expect(tiles).to receive(:[]).with(1, 1).exactly(1).times
       subject.tile(1, 1)
     end
-
   end
 end

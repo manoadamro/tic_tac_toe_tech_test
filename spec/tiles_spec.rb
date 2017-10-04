@@ -1,7 +1,6 @@
 require('./lib/tiles')
 
 describe 'Tiles' do
-
   let(:array_klass) { double(:array_klass) }
   let(:array) { double(:array) }
 
@@ -25,7 +24,6 @@ describe 'Tiles' do
   end
 
   describe '#[]' do
-
     it 'responds to []' do
       expect(subject).to respond_to(:[])
     end
@@ -36,7 +34,7 @@ describe 'Tiles' do
 
     it '[]= sets array element' do
       expect(array).to receive(:[]=)
-      subject[1, 1] = "X"
+      subject[1, 1] = 'X'
     end
 
     it 'returns tile if in range' do
@@ -49,7 +47,6 @@ describe 'Tiles' do
   end
 
   describe '#length' do
-
     it 'responds to length' do
       expect(subject).to respond_to(:length)
     end
