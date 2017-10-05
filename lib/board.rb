@@ -1,3 +1,4 @@
+require('./lib/tiles')
 
 # Responsible for placing objects on tiles
 class Board
@@ -25,6 +26,6 @@ class Board
   private
 
   def available?(x, y)
-    @tiles[x, y] == ''
+    @tiles[x, y] == nil
   end
 end

@@ -13,7 +13,7 @@ class Game
 
   def play(x, y)
     @turn_manager.turn(x, y)
-    @win_condition.check_for_win(x, y)
+    exit if @win_condition.check_for_win
   end
 
   private

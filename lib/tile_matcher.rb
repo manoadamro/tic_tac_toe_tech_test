@@ -1,6 +1,6 @@
 require('./lib/patterns')
 
-# responsible for checking all tiles in a pattern are the same 
+# responsible for checking all tiles in a pattern are the same
 class TileMatcher
   attr_reader :board
 
@@ -20,12 +20,13 @@ class TileMatcher
   private
 
   def match(a, b, c)
-    a = @board.tile[*a]
-    a != '' && equals(a, b) && equals(a, c)
+    a = @board.tile(*a)
+    a != nil && equals(a, b) && equals(a, c)
   end
 
   def equals(symbol, coords)
-    symbol == @board.tile[*coords]
+    @board.tile(*coords)
+    symbol == @board.tile(*coords)
   end
 end
 

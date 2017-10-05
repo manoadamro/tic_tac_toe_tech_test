@@ -20,7 +20,7 @@ class TurnManager
   private
 
   def player_symbol
-    @players[@player_index]
+    @players[player_index]
   end
 
   def next_turn

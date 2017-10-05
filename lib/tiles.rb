@@ -3,13 +3,12 @@
 class Tiles
   def initialize(size, array_klass = Array)
     @size = size
-    @tiles = array_klass.new(size * size) { '' }
+    @tiles = array_klass.new(size * size) { nil }
   end
 
   def [](x, y)
     index = index_from_coord(x, y)
-    @tiles[index] if index < @tiles.length
-    nil
+    @tiles[index]
   end
 
   def []=(x, y, value)
