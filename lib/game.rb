@@ -16,8 +16,6 @@ class Game
     exit if @win_condition.check_for_win
   end
 
-  private
-
   def players
     %w[X O]
   end
