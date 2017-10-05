@@ -13,7 +13,7 @@ class Game
 
   def play(x, y)
     @turn_manager.turn(x, y)
-    exit if @win_condition.check_for_win
+    @win_condition.check_for_win(players[@turn_manager.player_index])
   end
 
   def players

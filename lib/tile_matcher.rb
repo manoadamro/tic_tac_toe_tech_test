@@ -1,31 +1,20 @@
 require('./lib/patterns')
+require('./lib/comparison')
 
 # responsible for checking all tiles in a pattern are the same
 class TileMatcher
-  attr_reader :board
-
-  def initialize(board, patterns = Patterns)
-    @board = board
+  def initialize(board, patterns = Patterns, comparison = Comparison)
     @patterns = patterns
+    @comparison = comparison.new(board)
   end
 
   def row_or_column?(i)
-    match(*@patterns.column(i)) || match(*@patterns.row(i))
+    @comparison.match(*@patterns.column(i)) ||
+      @comparison.match(*@patterns.row(i))
   end
 
   def diagonal?
-    match(*@patterns.diagonal) || match(*@patterns.anti_diagonal)
-  end
-
-  private
-
-  def match(a, b, c)
-    a = @board.tile(*a)
-    !a.nil? && equals(a, b) && equals(a, c)
-  end
-
-  def equals(symbol, coords)
-    @board.tile(*coords)
-    symbol == @board.tile(*coords)
+    @comparison.match(*@patterns.diagonal) ||
+      @comparison.match(*@patterns.anti_diagonal)
   end
 end

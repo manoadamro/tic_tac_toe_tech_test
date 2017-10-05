@@ -42,6 +42,7 @@ describe 'Game' do
   describe '#play' do
     before do
       allow(turn_manager).to receive(:turn).and_return(1)
+      allow(turn_manager).to receive(:player_index).and_return(0)
       allow(win_condition).to receive(:check_for_win).and_return(false)
     end
 

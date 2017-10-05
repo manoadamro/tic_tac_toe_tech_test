@@ -1,15 +1,19 @@
 require('./lib/algorithm')
+require('./lib/messages')
 
 # responsible for checking if the game was won by the last move
 class WinCondition
-  def initialize(board, turn_manager, algorithm = Algorithm)
+  def initialize(board, turn_manager,
+                 algorithm = Algorithm, messages = Messages.new)
     @board = board
     @turn_manager = turn_manager
     @algorithm = algorithm.new(board)
+    @messages = messages
   end
 
-  def check_for_win
-    board_full || @algorithm.run_pass
+  def check_for_win(player)
+    @messages.draw if board_full
+    @messages.win(player) if @algorithm.run_pass
   end
 
   private

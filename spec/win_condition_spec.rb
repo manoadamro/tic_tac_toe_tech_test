@@ -39,17 +39,17 @@ describe 'Win Condition' do
 
     it 'checks turn count in turn_manager' do
       expect(turn_manager).to receive(:turns)
-      subject.check_for_win
+      subject.check_for_win('X')
     end
 
     it 'gets boards sqr_size' do
       expect(board).to receive(:sqr_size)
-      subject.check_for_win
+      subject.check_for_win('X')
     end
 
     it 'runs algorithm for check for 3 in a row' do
       expect(algorithm).to receive(:run_pass)
-      subject.check_for_win
+      subject.check_for_win('X')
     end
   end
 end
