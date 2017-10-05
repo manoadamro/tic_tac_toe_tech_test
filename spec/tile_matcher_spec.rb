@@ -35,6 +35,7 @@ describe 'TileMatcher' do
     end
 
     it 'calls patterns.row' do
+      allow(subject).to receive(:match).and_return(false)
       expect(patterns).to receive(:row)
       subject.row_or_column?(1)
     end
@@ -52,6 +53,7 @@ describe 'TileMatcher' do
     end
 
     it 'calls patterns.anti_diagonal' do
+      allow(subject).to receive(:match).and_return(false)
       expect(patterns).to receive(:anti_diagonal)
       subject.diagonal?
     end

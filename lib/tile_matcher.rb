@@ -21,16 +21,11 @@ class TileMatcher
 
   def match(a, b, c)
     a = @board.tile(*a)
-    a != nil && equals(a, b) && equals(a, c)
+    !a.nil? && equals(a, b) && equals(a, c)
   end
 
   def equals(symbol, coords)
     @board.tile(*coords)
     symbol == @board.tile(*coords)
   end
-end
-
-
-def print_all
-  puts print_header << print_statement
 end

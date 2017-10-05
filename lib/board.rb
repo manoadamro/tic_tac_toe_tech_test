@@ -26,6 +26,6 @@ class Board
   private
 
   def available?(x, y)
-    @tiles[x, y] == nil
+    @tiles[x, y].nil?
   end
 end

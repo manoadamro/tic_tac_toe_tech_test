@@ -22,4 +22,4 @@ game.play(0, 2)
 puts "Player#{game.turn_manager.player_index + 1}s turn (1, 3)"
 game.play(1, 2)
 
-puts("If i get printed, i failed")
+puts('If i get printed, i failed')

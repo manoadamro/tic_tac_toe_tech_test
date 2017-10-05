@@ -39,6 +39,7 @@ describe 'Board' do
     end
 
     it 'checks that tile is available' do
+      allow(tiles).to receive(:[]=)
       expect(tiles).to receive(:[])
       subject.place('X', 1, 1)
     end
