@@ -3,23 +3,23 @@
 ## Usage:
 
   in irb:
-    ```ruby
-      require('./lib/board')
-      require('./lib/game')
 
-      board = Board.new(3)
-      game = Game.new(board)
+  ```ruby
+    require('./lib/board')
+    require('./lib/game')
 
-      # to place a piece
+    board = Board.new(3)
+    game = Game.new(board)
 
-      game.place(1, 2) # 1 & 2 refer to the x, y coordinates of the target tile
+    # to place a piece
 
-      # you can get the current players symbol index with:
-      game.players[game.turn_manager.player_index]
+    game.place(1, 2) # 1 & 2 refer to the x, y coordinates of the target tile
 
-      # the game will exit when the board is full
+    # you can get the current players symbol index with:
+    game.players[game.turn_manager.player_index]
 
-    ```
+    # the game will exit when the board is full
+  ```
 
 ## Testing:
 
