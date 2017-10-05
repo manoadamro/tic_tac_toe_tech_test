@@ -42,28 +42,28 @@ describe 'Turn Manager' do
     end
 
     it 'responds to turn' do
-      expect(subject).to respond_to(:turn).with(2).arguments
+      expect(subject).to respond_to(:turn).with(3).arguments
     end
 
     it 'calls board.place' do
       expect(board).to receive(:place).exactly(1).times
-      subject.turn(1, 1)
+      subject.turn(1, 1, 'X')
     end
 
     it 'turn returns correct player index' do
       allow(subject).to receive(:turns).and_return(156)
-      expect(subject.turn(1, 1)).to eq(1)
+      expect(subject.turn(1, 1, 'X')).to eq(1)
     end
 
     it 'increments turns on valid placement' do
       allow(board).to receive(:place).and_return(true)
-      subject.turn(1, 2)
+      subject.turn(1, 2, 'X')
       expect(subject.turns).to eq(1)
     end
 
     it 'does not increment turns on invalid placement' do
       allow(board).to receive(:place).and_return(false)
-      subject.turn(1, 2)
+      subject.turn(1, 2, 'X')
       expect(subject.turns).to eq(0)
     end
   end
@@ -80,7 +80,7 @@ describe 'Turn Manager' do
     it 'returns 1 on odd number of turns' do
       allow(board).to receive(:place).and_return(true)
       allow(players).to receive(:'[]').and_return(true)
-      subject.turn(1, 1)
+      subject.turn(1, 1, 'X')
       expect(subject.player_index).to eq(1)
     end
   end

@@ -3,8 +3,6 @@ require_relative('./win_condition.rb')
 
 # The entry point for the program
 class Game
-  attr_reader :turn_manager, :win_condition
-
   def initialize(board,
                  turn_manager = TurnManager, win_condition = WinCondition)
     @turn_manager = turn_manager.new(players, board)
@@ -12,11 +10,17 @@ class Game
   end
 
   def play(x, y)
-    @turn_manager.turn(x, y)
-    @win_condition.check_for_win(players[@turn_manager.player_index])
+    @turn_manager.turn(x, y, current_player)
+    @win_condition.check_for_win(current_player)
   end
+
+  private
 
   def players
     %w[X O]
+  end
+
+  def current_player
+    players[@turn_manager.player_index]
   end
 end

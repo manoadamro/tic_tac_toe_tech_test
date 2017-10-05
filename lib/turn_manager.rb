@@ -9,8 +9,8 @@ class TurnManager
     @turns = 0
   end
 
-  def turn(x, y)
-    next_turn if @board.place(player_symbol, x, y)
+  def turn(x, y, current_player)
+    next_turn if @board.place(current_player, x, y)
   end
 
   def player_index
@@ -18,10 +18,6 @@ class TurnManager
   end
 
   private
-
-  def player_symbol
-    @players[player_index]
-  end
 
   def next_turn
     @turns += 1

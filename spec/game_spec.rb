@@ -21,22 +21,6 @@ describe 'Game' do
     it 'responds to new' do
       expect(Game).to respond_to(:new).with(3).arguments
     end
-
-    it 'can reference turn manager' do
-      expect(subject).to respond_to(:turn_manager)
-    end
-
-    it 'creates turn manager' do
-      expect(subject.turn_manager).not_to eq(nil)
-    end
-
-    it 'can reference win condition' do
-      expect(subject).to respond_to(:win_condition)
-    end
-
-    it 'creates win condition' do
-      expect(subject.win_condition).not_to eq(nil)
-    end
   end
 
   describe '#play' do
