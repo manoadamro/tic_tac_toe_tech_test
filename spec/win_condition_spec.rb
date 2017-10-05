@@ -9,6 +9,7 @@ describe 'Win Condition' do
 
   before do
     allow(algorithm_klass).to receive(:new).and_return(algorithm)
+    allow(board).to receive(:sqr_size).and_return(9)
   end
 
   describe '#new' do

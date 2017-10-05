@@ -5,7 +5,7 @@ require('./lib/messages')
 class WinCondition
   def initialize(board, turn_manager,
                  algorithm = Algorithm, messages = Messages.new)
-    @board = board
+    @max_turns = board.sqr_size
     @turn_manager = turn_manager
     @algorithm = algorithm.new(board)
     @messages = messages
@@ -19,6 +19,6 @@ class WinCondition
   private
 
   def board_full
-    @turn_manager.turns == @board.sqr_size
+    @turn_manager.turns == @max_turns
   end
 end
